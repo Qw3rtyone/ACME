@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4401646469141018}
   - component: {fileID: 212000598553958546}
+  - component: {fileID: 95860139585277190}
   m_Layer: 0
   m_Name: Digger
   m_TagString: Untagged
@@ -34,12 +35,30 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1700474022994178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.8, y: 0.58, z: -0.09376275}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -8.258, y: 2.926, z: -0.09376275}
+  m_LocalScale: {x: 0.11952037, y: 0.11952037, z: 0.11952037}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95860139585277190
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1700474022994178}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e120e6fb5ecb3c14693db0f11f399308, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &212000598553958546
 SpriteRenderer:
   m_ObjectHideFlags: 1
