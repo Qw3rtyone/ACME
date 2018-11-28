@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - FuelBar
+  - Spawner
+  - Gold
+  - Dirt
+  - Diamond
+  - Dollars
   layers:
   - Default
   - TransparentFX

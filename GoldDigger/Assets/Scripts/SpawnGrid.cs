@@ -8,14 +8,16 @@ public class SpawnGrid : MonoBehaviour {
     private int height = 170;
 
     private float diamondChance = 1, goldChance = 1;
-
+    public GameObject[][] grid;
 	// Use this for initialization
 	void Start () {
         GameObject Player = Instantiate(Resources.Load("Digger")) as GameObject;
         Player.AddComponent<DiggerControl>();
+        Player.AddComponent<ColliderLogic>();
         Player.transform.position = new Vector3(5, 1, -1);
+
         Debug.Log("Start the spawning");
-        GameObject[][] grid = new GameObject[width][];
+        grid = new GameObject[width][];
         for (int x = 0; x < width; x++)
         {
             grid[x] = new GameObject[height];

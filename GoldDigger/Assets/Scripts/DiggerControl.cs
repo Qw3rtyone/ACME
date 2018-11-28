@@ -10,10 +10,12 @@ public class DiggerControl : MonoBehaviour {
     private const int RIGHT = 4;
 
     private FuelBehaviour fuelBar;
+    private SpawnGrid grid;
     // Use this for initialization
     void Start () {
         fuelBar = GameObject.FindGameObjectWithTag("FuelBar").GetComponent<FuelBehaviour>();
-	}
+        grid = GameObject.FindGameObjectWithTag("Spawner").GetComponent<SpawnGrid>();
+    }
 
     /**
      * Checks if the the digger is outside the grid. 
@@ -38,8 +40,11 @@ public class DiggerControl : MonoBehaviour {
      */
     private void FuelConsume()
     {
-        int currentFuel = fuelBar.fuel--;
-        fuelBar.UpdateFuel(currentFuel);
+        if (this.transform.position.y != 1)
+        {
+            int currentFuel = fuelBar.fuel--;
+            fuelBar.UpdateFuel(currentFuel);
+        }
     }
     
     /**
@@ -71,7 +76,14 @@ public class DiggerControl : MonoBehaviour {
         }
         else if (!IsOutOfGrid(this.transform.position.x, this.transform.position.y, UP) && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
         {
-            //To-do. Check if block above has been dug before moving up.
+            int x = (int)this.transform.position.x;
+            int y = (int)(this.transform.position.y + 1) * -1;
+            if(grid.grid[x][y] == null)
+            {
+                this.transform.position += new Vector3(0, 1, 0);
+                this.transform.rotation = new Quaternion(0, 0, 0, 0);
+                FuelConsume();
+            }
         }
         else
             Debug.Log("not");
