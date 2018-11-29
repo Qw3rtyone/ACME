@@ -9,12 +9,16 @@ public class DiggerControl : MonoBehaviour {
     private const int LEFT = 3;
     private const int RIGHT = 4;
 
+    Vector3 target = new Vector3(1,1,0);
+
     private FuelBehaviour fuelBar;
     private SpawnGrid grid;
+    private GameObject refuel;
     // Use this for initialization
     void Start () {
         fuelBar = GameObject.FindGameObjectWithTag("FuelBar").GetComponent<FuelBehaviour>();
         grid = GameObject.FindGameObjectWithTag("Spawner").GetComponent<SpawnGrid>();
+        refuel = GameObject.FindGameObjectWithTag("Refuel");
     }
 
     /**
@@ -43,7 +47,7 @@ public class DiggerControl : MonoBehaviour {
         if (this.transform.position.y != 1)
         {
             int currentFuel = fuelBar.fuel--;
-            fuelBar.UpdateFuel(currentFuel);
+            fuelBar.UpdateFuel();// (currentFuel);
         }
     }
     
@@ -78,7 +82,8 @@ public class DiggerControl : MonoBehaviour {
         {
             int x = (int)this.transform.position.x;
             int y = (int)(this.transform.position.y + 1) * -1;
-            if(grid.grid[x][y] == null)
+           
+            if(y == -1 || grid.grid[x][y] == null)
             {
                 this.transform.position += new Vector3(0, 1, 0);
                 this.transform.rotation = new Quaternion(0, 0, 0, 0);
@@ -90,10 +95,24 @@ public class DiggerControl : MonoBehaviour {
         
     }
 
-// Update is called once per frame
+    private void FloatingButton()
+    {
+
+        if (Mathf.Round(refuel.transform.position.x) == Mathf.Round(target.x) || Mathf.Round(refuel.transform.position.y) == Mathf.Round(target.y))
+            target = this.transform.position + new Vector3(2, 1, 0);
+
+        refuel.transform.position = Vector3.Lerp(refuel.transform.position, target, Time.deltaTime * 1.0f);
+        
+    }
+    // Update is called once per frame
     void Update()
     {
         Movement();
+        if (this.transform.position.y == 1)
+            refuel.SetActive(true);
+        else
+            refuel.SetActive(false);
+        FloatingButton();
         Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position,this.transform.position + new Vector3(0,0,-25), Time.deltaTime * 2.0f);
     }
         

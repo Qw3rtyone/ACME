@@ -9,12 +9,14 @@ public class ColliderLogic : MonoBehaviour {
     GameObject[][] grid;
     GameObject tile;
     FuelBehaviour fuelBehaviour;
+
     int x, y, points;
 	// Use this for initialization
 	void Start () {
         gridSpawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<SpawnGrid>();
         grid = gridSpawner.grid;
         fuelBehaviour = GameObject.FindGameObjectWithTag("FuelBar").GetComponent<FuelBehaviour>();
+        points = fuelBehaviour.dollars;
 	}
 	
     /**

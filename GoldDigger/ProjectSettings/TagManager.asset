@@ -10,6 +10,7 @@ TagManager:
   - Dirt
   - Diamond
   - Dollars
+  - Refuel
   layers:
   - Default
   - TransparentFX
