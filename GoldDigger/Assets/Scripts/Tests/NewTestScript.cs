@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class NewTestScript {
 
-
     [Test]
     public void TestFuelConsume()
     {
