@@ -43,7 +43,7 @@ public class DiggerControl : MonoBehaviour {
     }
 
     /*
-     * Reduces fuel available to the player on each movement
+     * Reduces fuel available to the player on each movement.
      */
     private void FuelConsume(FuelBehaviour fuelBar)
     {
@@ -53,57 +53,53 @@ public class DiggerControl : MonoBehaviour {
             fuelBar.UpdateFuel();
         }
     }
-
+    //Test the private function Fuel consume
     public GameObject TestFuelConsume(int fuel, GameObject go)
     {
         go.GetComponent<FuelBehaviour>().fuel = fuel;
         FuelConsume(go.GetComponent<FuelBehaviour>());
         return go;
     }
-    
-    public int TestMovement()
+
+    public Vector3 TestMovement(string direction, GameObject go)
     {
-        int result = 0;
+        Vector3 result = new Vector3(0, 0, 0);
+        FuelBehaviour fb = go.GetComponent<FuelBehaviour>();
+        fb.fuel = 2;
+        if (direction == "up")
+        {
+            Movement(new Vector3(0, 1, 0), Quaternion.Euler(0, 0, 0), fb);
+            result = this.transform.position;
+        }
+        else if(direction == "down")
+        {
+            Movement(new Vector3(0, -1, 0), Quaternion.Euler(0, 0, 0), fb);
+            result = this.transform.position;
+        }
+        else if(direction == "left")
+        {
+            Movement(new Vector3(-1, 0, 0), Quaternion.Euler(0, 0, -90), fb);
+            result = this.transform.position;
+        }
+        else if(direction == "right")
+        {
+            Movement(new Vector3(1, 0, 0), Quaternion.Euler(0, 0, 90), fb);
+            result = this.transform.position;
+        }
         return result;
     }
     /**
      * Controls movement of the player sprite. 
      * Standard Controls (arrows + wasd). Only moves one block per press
      */
-    private void Movement()
+    private void Movement(Vector3 position, Quaternion rotation, FuelBehaviour fuelbar)
     {
-        if (!IsOutOfGrid(this.transform.position.x, this.transform.position.y, DOWN) && (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)))
+        if (position != null)
         {
-            this.transform.rotation = new Quaternion(0, 0, 0, 0);
-            this.transform.position += new Vector3(0, -1, 0);
-            FuelConsume(this.fuelBar);
-            Debug.Log("Down");
-        }
-        else if (!IsOutOfGrid(this.transform.position.x, this.transform.position.y, RIGHT) && (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)))
-        {
-            this.transform.rotation = Quaternion.Euler(0, 0, 90);
-            this.transform.position += new Vector3(1, 0, 0);
-            FuelConsume(this.fuelBar);
-            Debug.Log("Right");
-        }
-        else if (!IsOutOfGrid(this.transform.position.x, this.transform.position.y, LEFT) && (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)))
-        {
-            this.transform.rotation = Quaternion.Euler(0, 0, -90);
-            this.transform.position += new Vector3(-1, 0, 0);
-            FuelConsume(this.fuelBar);
-            Debug.Log("Left");
-        }
-        else if (!IsOutOfGrid(this.transform.position.x, this.transform.position.y, UP) && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
-        {
-            int x = (int)this.transform.position.x;
-            int y = (int)(this.transform.position.y + 1) * -1;
-           
-            if(y == -1 || grid.grid[x][y] == null)
-            {
-                this.transform.position += new Vector3(0, 1, 0);
-                this.transform.rotation = new Quaternion(0, 0, 0, 0);
-                FuelConsume(this.fuelBar);
-            }
+            this.transform.rotation = rotation;
+            this.transform.position += position;
+            FuelConsume(fuelbar);
+
         }
         else
             Debug.Log("not");
@@ -125,7 +121,20 @@ public class DiggerControl : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        Movement();
+        if (!IsOutOfGrid(this.transform.position.x, this.transform.position.y, DOWN) && (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)))
+            Movement(new Vector3(0, -1, 0), Quaternion.Euler(0, 0, 0), this.fuelBar);
+        else if (!IsOutOfGrid(this.transform.position.x, this.transform.position.y, RIGHT) && (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)))
+            Movement(new Vector3(1, 0, 0), Quaternion.Euler(0, 0, 90), this.fuelBar);
+        else if (!IsOutOfGrid(this.transform.position.x, this.transform.position.y, LEFT) && (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)))
+            Movement(new Vector3(-1, 0, 0), Quaternion.Euler(0, 0, -90), this.fuelBar);
+        else if (!IsOutOfGrid(this.transform.position.x, this.transform.position.y, UP) && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
+        {
+            int x = (int)this.transform.position.x;
+            int y = (int)(this.transform.position.y + 1) * -1;
+
+            if (y == -1 || grid.grid[x][y] == null)
+                Movement(new Vector3(0, 1, 0), Quaternion.Euler(0, 0, 0), this.fuelBar);
+        }
 
         if (this.transform.position.y == 1)
             refuel.SetActive(true);

@@ -9,7 +9,7 @@ public class SpawnGrid : MonoBehaviour {
 
     private float diamondChance = 1, goldChance = 1;
     public GameObject[][] grid;
-	// Use this for initialization
+	// Use this for initialization.
 	void Start () {
         GameObject Player = Instantiate(Resources.Load("Digger")) as GameObject;
         Player.AddComponent<DiggerControl>();
@@ -23,7 +23,7 @@ public class SpawnGrid : MonoBehaviour {
     /**
      * Create the game map and populate it with an appropriate number of each block
      */
-    private void SpawnMap()
+    public void SpawnMap()
     {
         grid = new GameObject[width][];
         for (int x = 0; x < width; x++)
