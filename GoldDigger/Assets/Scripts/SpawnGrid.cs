@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SpawnGrid : MonoBehaviour {
 
-    private int width = 85;
-    private int height = 170;
+    public static int width = 85;
+    public static int height = 170;
 
     private float diamondChance = 1, goldChance = 1;
     public GameObject[][] grid;
@@ -17,6 +17,14 @@ public class SpawnGrid : MonoBehaviour {
         Player.transform.position = new Vector3(5, 1, -1);
 
         Debug.Log("Start the spawning");
+        SpawnMap();
+    }
+	
+    /**
+     * Create the game map and populate it with an appropriate number of each block
+     */
+    private void SpawnMap()
+    {
         grid = new GameObject[width][];
         for (int x = 0; x < width; x++)
         {
@@ -49,7 +57,6 @@ public class SpawnGrid : MonoBehaviour {
             }
         }
     }
-	
 	// Update is called once per frame
 	void Update () {
 		

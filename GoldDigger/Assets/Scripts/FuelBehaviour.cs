@@ -11,17 +11,18 @@ public class FuelBehaviour : MonoBehaviour {
     public Text fuelBar, dollarBar;
 	// Use this for initialization
 	void Start () {
-        fuelBar = GameObject.FindGameObjectWithTag("FuelBar").GetComponent<Text>();
+        //fuelBar = GameObject.FindGameObjectWithTag("FuelBar").GetComponent<Text>();
+        fuelBar = this.gameObject.GetComponent<Text>();
         dollarBar = GameObject.FindGameObjectWithTag("Dollars").GetComponent<Text>();
 
         fuel = 35;
-        fuelBar.text = "Fuels: " + fuel;
+        fuelBar.text = "Fuel: " + fuel;
         dollarBar.text = "$ " + dollars;
     }
 	/**
      * Update the fuel tab in the UI.
      */
-    public void UpdateFuel()//int fuel)
+    public void UpdateFuel()
     {
         if (fuel > 0)
             fuelBar.text = "Fuel: " + fuel;
@@ -38,13 +39,14 @@ public class FuelBehaviour : MonoBehaviour {
         {
             dollars -= 5;
             fuel += 10;
-            UpdateFuel();//fuel);
+            UpdateFuel();
             UpdateDollars(dollars);
         }
     }
 
     /**
      * Update the current money earned by the player. Should be called from ColliderLogic
+     * @param points The value to update the UI element with
      */
     public void UpdateDollars(int points)
     {

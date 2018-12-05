@@ -23,17 +23,20 @@ public class DiggerControl : MonoBehaviour {
 
     /**
      * Checks if the the digger is outside the grid. 
-     * returns a boolean value
+     * @param x The current x position of the player
+     * @param y The current y position of the player
+     * @param dir The direction the player wants to move
+     * @return True if one the edge of the grid. False otherwise
      */
-    private bool IsOutOfGrid(float x, float y, int dir)
+    public bool IsOutOfGrid(float x, float y, int dir)
     {
         if (dir == UP && (y >= 1))
             return true;
-        else if (dir == DOWN && (y <= -169))
+        else if (dir == DOWN && (y <= (SpawnGrid.height - 1)*-1))
             return true;
         else if (dir == LEFT && (x <= 0))
             return true;
-        else if (dir == RIGHT && (x >= 84))
+        else if (dir == RIGHT && (x >= (SpawnGrid.width -1)))
             return true;
         else
             return false;
@@ -42,15 +45,27 @@ public class DiggerControl : MonoBehaviour {
     /*
      * Reduces fuel available to the player on each movement
      */
-    private void FuelConsume()
+    private void FuelConsume(FuelBehaviour fuelBar)
     {
         if (this.transform.position.y != 1)
         {
-            int currentFuel = fuelBar.fuel--;
-            fuelBar.UpdateFuel();// (currentFuel);
+            fuelBar.fuel--;
+            fuelBar.UpdateFuel();
         }
     }
+
+    public GameObject TestFuelConsume(int fuel, GameObject go)
+    {
+        go.GetComponent<FuelBehaviour>().fuel = fuel;
+        FuelConsume(go.GetComponent<FuelBehaviour>());
+        return go;
+    }
     
+    public int TestMovement()
+    {
+        int result = 0;
+        return result;
+    }
     /**
      * Controls movement of the player sprite. 
      * Standard Controls (arrows + wasd). Only moves one block per press
@@ -61,21 +76,21 @@ public class DiggerControl : MonoBehaviour {
         {
             this.transform.rotation = new Quaternion(0, 0, 0, 0);
             this.transform.position += new Vector3(0, -1, 0);
-            FuelConsume();
+            FuelConsume(this.fuelBar);
             Debug.Log("Down");
         }
         else if (!IsOutOfGrid(this.transform.position.x, this.transform.position.y, RIGHT) && (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)))
         {
             this.transform.rotation = Quaternion.Euler(0, 0, 90);
             this.transform.position += new Vector3(1, 0, 0);
-            FuelConsume();
+            FuelConsume(this.fuelBar);
             Debug.Log("Right");
         }
         else if (!IsOutOfGrid(this.transform.position.x, this.transform.position.y, LEFT) && (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)))
         {
             this.transform.rotation = Quaternion.Euler(0, 0, -90);
             this.transform.position += new Vector3(-1, 0, 0);
-            FuelConsume();
+            FuelConsume(this.fuelBar);
             Debug.Log("Left");
         }
         else if (!IsOutOfGrid(this.transform.position.x, this.transform.position.y, UP) && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
@@ -87,7 +102,7 @@ public class DiggerControl : MonoBehaviour {
             {
                 this.transform.position += new Vector3(0, 1, 0);
                 this.transform.rotation = new Quaternion(0, 0, 0, 0);
-                FuelConsume();
+                FuelConsume(this.fuelBar);
             }
         }
         else
@@ -95,6 +110,9 @@ public class DiggerControl : MonoBehaviour {
         
     }
 
+    /**
+     * The floating UI element that's only present when the player is on the 'surface'
+     */
     private void FloatingButton()
     {
 
@@ -108,10 +126,12 @@ public class DiggerControl : MonoBehaviour {
     void Update()
     {
         Movement();
+
         if (this.transform.position.y == 1)
             refuel.SetActive(true);
         else
             refuel.SetActive(false);
+
         FloatingButton();
         Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position,this.transform.position + new Vector3(0,0,-25), Time.deltaTime * 2.0f);
     }
