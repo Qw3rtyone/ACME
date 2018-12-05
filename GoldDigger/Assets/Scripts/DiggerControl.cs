@@ -53,7 +53,7 @@ public class DiggerControl : MonoBehaviour {
             fuelBar.UpdateFuel();
         }
     }
-
+    //Test the private function Fuel consume
     public GameObject TestFuelConsume(int fuel, GameObject go)
     {
         go.GetComponent<FuelBehaviour>().fuel = fuel;
