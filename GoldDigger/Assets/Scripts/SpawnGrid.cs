@@ -23,7 +23,7 @@ public class SpawnGrid : MonoBehaviour {
     /**
      * Create the game map and populate it with an appropriate number of each block
      */
-    private void SpawnMap()
+    public void SpawnMap()
     {
         grid = new GameObject[width][];
         for (int x = 0; x < width; x++)

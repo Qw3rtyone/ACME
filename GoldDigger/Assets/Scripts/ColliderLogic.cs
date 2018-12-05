@@ -8,9 +8,9 @@ public class ColliderLogic : MonoBehaviour {
     SpawnGrid gridSpawner;
     GameObject[][] grid;
     GameObject tile;
-    FuelBehaviour fuelBehaviour;
+    public FuelBehaviour fuelBehaviour;
 
-    int x, y, points;
+    public int x, y, points;
 	// Use this for initialization
 	void Start () {
         gridSpawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<SpawnGrid>();
@@ -23,7 +23,7 @@ public class ColliderLogic : MonoBehaviour {
      * Collect the correct points depending on the block mined
      * @param block The block the player occupies.
      */
-    private void Collect(string block)
+    public void Collect(string block)
     {
         if (block == "Gold")
             points += 10;
