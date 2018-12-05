@@ -18,7 +18,7 @@ public class Refuel : MonoBehaviour {
     {
         fuelBehaviour.Refuel();
     }
-	// Update is called once per frame
+	// Update is called once per frame.
 	void Update () {
 		
 	}

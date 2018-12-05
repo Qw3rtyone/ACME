@@ -20,7 +20,7 @@ public class ColliderLogic : MonoBehaviour {
 	}
 	
     /**
-     * Collect the correct points depending on the block mined
+     * Collect the correct points depending on the block mined.
      * @param block The block the player occupies.
      */
     public void Collect(string block)

@@ -6,8 +6,10 @@ using UnityEngine.UI;
 
 public class NewTestScript {
 
+
     [Test]
-    public void TestFuelConsume() {
+    public void TestFuelConsume()
+    {
         GameObject go = new GameObject();
         go.AddComponent<DiggerControl>();
         go.AddComponent<Text>();
@@ -24,7 +26,7 @@ public class NewTestScript {
         Assert.AreNotEqual(2, fb.GetComponent<FuelBehaviour>().fuel);
         Assert.AreEqual("Fuel: 1", fb.GetComponent<FuelBehaviour>().fuelBar.text);
 
-        /*//If player is at surface (y=1), fuel should not be consumed
+        /*//If player is at surface (y=1), fuel should not be consumed.
         go.transform.position = new Vector3(1, 1, 1);
         fb = go.GetComponent<DiggerControl>().TestFuelConsume(fuel, go.GetComponent<FuelBehaviour>());
 
@@ -149,7 +151,8 @@ public class NewTestScript {
     // A UnityTest behaves like a coroutine in PlayMode
     // and allows you to yield null to skip a frame in EditMode
     [UnityTest]
-    public IEnumerator NewTestScriptWithEnumeratorPasses() {
+    public IEnumerator NewTestScriptWithEnumeratorPasses()
+    {
         // Use the Assert class to test conditions.
         // yield to skip a frame
         yield return null;

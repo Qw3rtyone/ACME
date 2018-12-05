@@ -9,7 +9,7 @@ public class SpawnGrid : MonoBehaviour {
 
     private float diamondChance = 1, goldChance = 1;
     public GameObject[][] grid;
-	// Use this for initialization
+	// Use this for initialization.
 	void Start () {
         GameObject Player = Instantiate(Resources.Load("Digger")) as GameObject;
         Player.AddComponent<DiggerControl>();

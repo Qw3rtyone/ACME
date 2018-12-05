@@ -9,7 +9,7 @@ public class FuelBehaviour : MonoBehaviour {
     public int fuel;
     public int dollars = 0;
     public Text fuelBar, dollarBar;
-	// Use this for initialization
+	// Use this for initialization.
 	void Start () {
         //fuelBar = GameObject.FindGameObjectWithTag("FuelBar").GetComponent<Text>();
         fuelBar = this.gameObject.GetComponent<Text>();

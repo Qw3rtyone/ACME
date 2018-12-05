@@ -43,7 +43,7 @@ public class DiggerControl : MonoBehaviour {
     }
 
     /*
-     * Reduces fuel available to the player on each movement
+     * Reduces fuel available to the player on each movement.
      */
     private void FuelConsume(FuelBehaviour fuelBar)
     {
