@@ -35,12 +35,13 @@ public class FuelBehaviour : MonoBehaviour {
      */
     public void Refuel()
     {
+        int points = 0;
         if(dollars >= 5)
         {
-            dollars -= 5;
+            points = -5;
             fuel += 10;
             UpdateFuel();
-            UpdateDollars(dollars);
+            UpdateDollars(points);
         }
     }
 
@@ -50,7 +51,7 @@ public class FuelBehaviour : MonoBehaviour {
      */
     public void UpdateDollars(int points)
     {
-        dollars = points;
+        dollars += points;
         dollarBar.text = "$ " + dollars;
     }
 
