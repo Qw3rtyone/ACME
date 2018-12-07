@@ -26,17 +26,18 @@ public class ColliderLogic : MonoBehaviour {
     public void Collect(string block)
     {
         if (block == "Gold")
-            points += 10;
+            points = 10;
         else if (block == "Diamond")
-            points += 20;
+            points = 20;
         else
-            points += 0;
+            points = 0;
 
         fuelBehaviour.UpdateDollars(points);
 
     }
 	// Update is called once per frame
 	void Update () {
+        Debug.Log("HKJHKH");
         x = (int) this.transform.position.x;
         y = (int) this.transform.position.y * -1;
         
