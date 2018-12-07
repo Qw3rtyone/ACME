@@ -37,7 +37,6 @@ public class ColliderLogic : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
-        Debug.Log("HKJHKH");
         x = (int) this.transform.position.x;
         y = (int) this.transform.position.y * -1;
         
