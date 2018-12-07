@@ -117,7 +117,7 @@ public class NewTestScript {
         go.AddComponent<FuelBehaviour>();
         go.AddComponent<Text>();
 
-        go.GetComponent<FuelBehaviour>().dollars = 8;
+        go.GetComponent<FuelBehaviour>().dollars = 0;
         go.GetComponent<FuelBehaviour>().dollarBar = go.GetComponent<Text>();
 
         go.GetComponent<FuelBehaviour>().UpdateDollars(8);
@@ -140,9 +140,9 @@ public class NewTestScript {
         go.GetComponent<ColliderLogic>().Collect("Diamond");
         Assert.AreEqual(20, go.GetComponent<ColliderLogic>().points);
         go.GetComponent<ColliderLogic>().Collect("Dirt");
-        Assert.AreEqual(20, go.GetComponent<ColliderLogic>().points);
+        Assert.AreEqual(0, go.GetComponent<ColliderLogic>().points);
         go.GetComponent<ColliderLogic>().Collect("Gold");
-        Assert.AreEqual(30, go.GetComponent<ColliderLogic>().points);
+        Assert.AreEqual(10, go.GetComponent<ColliderLogic>().points);
 
 
 
